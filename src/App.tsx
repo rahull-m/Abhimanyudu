@@ -21,9 +21,10 @@ import { GraphVisualizer } from './components/GraphVisualizer';
 import { ThreatAnalytics } from './components/ThreatAnalytics';
 import { PolicyConfigurator } from './components/PolicyConfigurator';
 import { CustomTxModal } from './components/CustomTxModal';
+import { ArchitecturePipeline } from './components/ArchitecturePipeline';
 
 export const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'MONITOR' | 'GRAPH' | 'ANALYTICS' | 'POLICY'>('MONITOR');
+  const [activeTab, setActiveTab] = useState<'PIPELINE' | 'MONITOR' | 'GRAPH' | 'ANALYTICS' | 'POLICY'>('PIPELINE');
   const [transactions, setTransactions] = useState<Transaction[]>(() => generateInitialTransactions());
   const [policy, setPolicy] = useState<PolicyConfig>(DEFAULT_POLICY_CONFIG);
   const [selectedTx, setSelectedTx] = useState<Transaction | null>(null);
@@ -219,6 +220,16 @@ export const App: React.FC = () => {
         
         {/* KPI Stats Overview */}
         <StatsOverview transactions={transactions} />
+
+        {/* Tab 0: Interactive Architecture Pipeline (Matching Prompt Flowchart) */}
+        {activeTab === 'PIPELINE' && (
+          <ArchitecturePipeline
+            policyConfig={policy}
+            onTransactionProcessed={(newTx) => {
+              setTransactions(prev => [newTx, ...prev.slice(0, 49)]);
+            }}
+          />
+        )}
 
         {/* Tab 1: Real-Time Live Monitor */}
         {activeTab === 'MONITOR' && (

@@ -23,6 +23,31 @@ export const RECIPIENT_CATALOG = [
 // Pre-built Attack Scenarios for the Interactive Simulator
 export const ATTACK_SCENARIOS: AttackScenario[] = [
   {
+    id: 'scen_prompt_diagram',
+    name: 'Prompt High-Risk Flow (abc@upi - ₹50,000)',
+    description: 'Transaction of ₹50,000 sent to unverified VPA abc@upi triggering High Risk (Score 93/100) -> HOLD status.',
+    vector: 'SCAM_VPA_PHISHING',
+    badgeColor: 'border-red-500 bg-red-500/10 text-red-400',
+    payloadGenerator: () => ({
+      senderId: 'usr_rahul',
+      senderName: 'Rahul Sharma',
+      senderVpa: 'rahul.sharma@okicici',
+      senderAvgTxAmount: 1850,
+      amount: 50000,
+      currency: 'INR',
+      recipient: {
+        vpa: 'abc@upi',
+        name: 'Unverified Merchant (abc@upi)',
+        accountAgeDays: 4,
+        fraudReportCount: 7,
+        isKnownMule: true,
+        riskRating: 93
+      },
+      location: { city: 'Mumbai', country: 'India', lat: 19.0760, lng: 72.8777, ip: '185.220.101.99' },
+      device: { deviceId: 'dev_unknown_abc', deviceName: 'Emulated Android Device', os: 'Android 13', isEmulator: true, isVpn: true, isKnownDevice: false }
+    })
+  },
+  {
     id: 'scen_ato',
     name: 'Account Takeover (ATO)',
     description: 'Stolen credentials used to transfer ₹1,45,000 from an unrecognized device in a foreign IP block.',

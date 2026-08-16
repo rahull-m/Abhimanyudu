@@ -69,7 +69,7 @@ export interface Transaction {
   previousLocation?: LocationData;
   previousTimestamp?: string;
   device: DeviceData;
-  status: 'PENDING' | 'ALLOWED' | 'STEP_UP_REQUIRED' | 'REVIEW_FLAGGED' | 'BLOCKED';
+  status: 'PENDING' | 'ALLOWED' | 'STEP_UP_REQUIRED' | 'REVIEW_FLAGGED' | 'BLOCKED' | 'HOLD' | 'REJECTED';
   riskAssessment: RiskAssessment;
 }
 

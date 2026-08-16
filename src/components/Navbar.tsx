@@ -2,8 +2,8 @@ import React from 'react';
 import { ShieldCheck, Activity, Sliders, Network, BarChart3, Radio, RefreshCw, AlertTriangle } from 'lucide-react';
 
 interface NavbarProps {
-  activeTab: 'MONITOR' | 'GRAPH' | 'ANALYTICS' | 'POLICY';
-  setActiveTab: (tab: 'MONITOR' | 'GRAPH' | 'ANALYTICS' | 'POLICY') => void;
+  activeTab: 'PIPELINE' | 'MONITOR' | 'GRAPH' | 'ANALYTICS' | 'POLICY';
+  setActiveTab: (tab: 'PIPELINE' | 'MONITOR' | 'GRAPH' | 'ANALYTICS' | 'POLICY') => void;
   isAutoSimulating: boolean;
   setIsAutoSimulating: (sim: boolean) => void;
   onResetData: () => void;
@@ -48,6 +48,18 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Center Navigation Tabs */}
           <nav className="hidden md:flex items-center space-x-1 p-1 bg-slate-900/80 rounded-xl border border-slate-800">
             <button
+              onClick={() => setActiveTab('PIPELINE')}
+              className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                activeTab === 'PIPELINE'
+                  ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-md shadow-cyan-500/20'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+              }`}
+            >
+              <Activity className="w-3.5 h-3.5" />
+              <span>Architecture Pipeline</span>
+            </button>
+
+            <button
               onClick={() => setActiveTab('MONITOR')}
               className={`flex items-center space-x-2 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 activeTab === 'MONITOR'
@@ -55,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
               }`}
             >
-              <Activity className="w-3.5 h-3.5" />
+              <Radio className="w-3.5 h-3.5" />
               <span>Live Monitor</span>
             </button>
 
